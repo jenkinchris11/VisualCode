@@ -14,6 +14,11 @@ Several advanced features requested (generative AI, professional denoise, social
 ## Building
 
 This project uses CMake and requires OpenCV and Exiv2 to be installed.
+On Ubuntu, install the development packages with:
+
+```bash
+sudo apt-get install libopencv-dev libexiv2-dev
+```
 
 ```bash
 mkdir build
