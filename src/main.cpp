@@ -21,6 +21,10 @@ int main(int argc, char **argv) {
         preset.contrast = 1.2;
     }
 
+        std::cerr << "Usage: " << argv[0] << " <catalog_path>" << std::endl;
+        return 1;
+    }
+
     Catalog catalog(argv[1]);
     if (!catalog.scan()) {
         std::cerr << "Failed to scan catalog" << std::endl;
@@ -45,6 +49,9 @@ int main(int argc, char **argv) {
                       proc.image().cols/2, proc.image().rows/2);
         cv::rectangle(mask, rect, cv::Scalar(255), cv::FILLED);
         proc.applyMask(mask);
+        // placeholder: automatic AI analysis would go here
+        proc.adjustBrightness(10); // example operation
+        proc.adjustContrast(1.2);  // example operation
 
         // save to output folder
         std::string output = "processed_" + std::string(std::filesystem::path(path).filename());

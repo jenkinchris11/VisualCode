@@ -28,6 +28,10 @@ provide a preset file containing brightness and contrast values:
 
 ```bash
 ./photo_editor ../path/to/catalog [preset.txt]
+Run the executable by passing a path to a folder of images:
+
+```bash
+./photo_editor ../path/to/catalog
 ```
 
 ## Continuous Integration
@@ -41,5 +45,7 @@ the code compiles successfully. You can find the configuration in
 ## Future Work
 
 - Add advanced AI tools and generative features.
+- Implement mask adjustments and advanced AI tools.
+- Add preset management and style libraries.
 - Integrate with external editors and social media APIs.
 
