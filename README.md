@@ -6,6 +6,8 @@ This repository contains a minimal C++ photo editing prototype intended for use 
 
 - Scan a folder for common image files (`jpg`, `png`, `dng`, `tiff`, `bmp`).
 - Apply basic brightness and contrast adjustments.
+- Load brightness/contrast presets from a simple text file.
+- Example mask adjustment applied to the center region of each image.
 - Save processed images to the working directory.
 
 Several advanced features requested (AI metadata insertion, generative AI, professional denoise, social media integration, etc.) are not implemented here. Stubs and TODO comments are provided where such functionality could be added.
@@ -21,6 +23,11 @@ cmake ..
 make
 ```
 
+Run the executable by passing a path to a folder of images. Optionally
+provide a preset file containing brightness and contrast values:
+
+```bash
+./photo_editor ../path/to/catalog [preset.txt]
 Run the executable by passing a path to a folder of images:
 
 ```bash
@@ -37,6 +44,7 @@ the code compiles successfully. You can find the configuration in
 
 ## Future Work
 
+- Add advanced AI tools and generative features.
 - Implement mask adjustments and advanced AI tools.
 - Add preset management and style libraries.
 - Integrate with external editors and social media APIs.

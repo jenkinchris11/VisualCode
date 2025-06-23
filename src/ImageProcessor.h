@@ -20,6 +20,10 @@ public:
     // adjust contrast [0.0, 3.0]
     void adjustContrast(double alpha);
 
+    // Apply a mask before saving/processing. Non-zero mask pixels are kept.
+    void applyMask(const cv::Mat &mask);
+
+    // TODO: implement more advanced features (AI tools, etc.)
     // TODO: implement more advanced features (masks, AI, etc.)
 
     const cv::Mat &image() const { return img_; }

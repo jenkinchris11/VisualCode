@@ -9,6 +9,7 @@ add_executable(photo_editor
     src/main.cpp
     src/Catalog.cpp
     src/ImageProcessor.cpp
+    src/Preset.cpp
 )
 
 target_include_directories(photo_editor PRIVATE ${OpenCV_INCLUDE_DIRS})

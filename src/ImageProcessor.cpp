@@ -23,3 +23,10 @@ void ImageProcessor::adjustContrast(double alpha) {
     if (img_.empty()) return;
     img_.convertTo(img_, -1, alpha, 0);
 }
+
+void ImageProcessor::applyMask(const cv::Mat &mask) {
+    if (img_.empty() || mask.empty()) return;
+    cv::Mat masked;
+    img_.copyTo(masked, mask);
+    img_ = masked;
+}
