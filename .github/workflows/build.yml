@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y cmake build-essential libopencv-dev
+        run: sudo apt-get update && sudo apt-get install -y cmake build-essential libopencv-dev libexiv2-dev
       - name: Configure
         run: cmake -B build -S .
       - name: Build
@@ -25,3 +25,22 @@ jobs:
         with:
           tag_name: v${{ github.sha }}
           name: Release v${{ github.sha }}
+
+  windows-release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          choco install cmake -y
+          choco install opencv -y
+          choco install exiv2 -y
+      - name: Configure
+        run: cmake -B build -S .
+      - name: Build
+        run: cmake --build build --config Release
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.sha }}
+          name: Windows Release v${{ github.sha }}
