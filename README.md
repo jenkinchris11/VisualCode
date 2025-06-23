@@ -7,12 +7,13 @@ This repository contains a minimal C++ photo editing prototype intended for use 
 - Scan a folder for common image files (`jpg`, `png`, `dng`, `tiff`, `bmp`).
 - Apply basic brightness and contrast adjustments.
 - Save processed images to the working directory.
+- Insert simple AI metadata into processed images.
 
-Several advanced features requested (AI metadata insertion, generative AI, professional denoise, social media integration, etc.) are not implemented here. Stubs and TODO comments are provided where such functionality could be added.
+Several advanced features requested (generative AI, professional denoise, social media integration, etc.) are not implemented here. Stubs and TODO comments are provided where such functionality could be added.
 
 ## Building
 
-This project uses CMake and requires OpenCV to be installed.
+This project uses CMake and requires OpenCV and Exiv2 to be installed.
 
 ```bash
 mkdir build
