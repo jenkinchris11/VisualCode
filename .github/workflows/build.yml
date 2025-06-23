@@ -32,9 +32,10 @@ jobs:
       - name: Install dependencies
         run: |
           $env:VCPKG_DEFAULT_TRIPLET = "x64-windows"
+          & "${{ env.VCPKG_INSTALLATION_ROOT }}\vcpkg.exe" install exiv2 opencv
           & "$env:VCPKG_INSTALLATION_ROOT\vcpkg.exe" install exiv2 opencv
       - name: Configure
-        run: cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_INSTALLATION_ROOT\scripts\buildsystems\vcpkg.cmake
+        run: cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_INSTALLATION_ROOT }}\scripts\buildsystems\vcpkg.cmake
       - name: Build
         run: cmake --build build --config Release
       - name: Release
