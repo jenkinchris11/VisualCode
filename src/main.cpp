@@ -29,7 +29,8 @@ int main(int argc, char **argv) {
         proc.adjustContrast(1.2);  // example operation
 
         // save to output folder
-        std::string output = "processed_" + std::string(std::filesystem::path(path).filename());
+        std::string output =
+            "processed_" + std::string(std::filesystem::path(path).filename());
         proc.save(output);
         std::cout << "Processed " << path << " -> " << output << std::endl;
     }
