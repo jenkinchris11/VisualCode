@@ -4,9 +4,19 @@ project(VisualCodePhotoEditor)
 set(CMAKE_CXX_STANDARD 17)
 
 find_package(OpenCV REQUIRED)
-find_package(PkgConfig)
-if(PkgConfig_FOUND)
-    pkg_check_modules(EXIV2 REQUIRED exiv2)
+# Prefer the CMake package configuration provided by vcpkg on Windows
+find_package(exiv2 CONFIG)
+if(NOT exiv2_FOUND)
+    find_package(PkgConfig)
+    if(PkgConfig_FOUND)
+        pkg_check_modules(EXIV2 REQUIRED exiv2)
+    else()
+        message(FATAL_ERROR "exiv2 not found")
+    endif()
+else()
+    # exiv2 provides an imported target named exiv2lib
+    set(EXIV2_LIBRARIES exiv2lib)
+    set(EXIV2_INCLUDE_DIRS "")
 endif()
 
 add_executable(photo_editor
