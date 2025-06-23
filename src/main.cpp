@@ -28,6 +28,9 @@ int main(int argc, char **argv) {
         proc.adjustBrightness(10); // example operation
         proc.adjustContrast(1.2);  // example operation
 
+        // insert simple AI metadata
+        proc.insertMetadata("Exif.Image.Software", "VisualCode AI v1");
+
         // save to output folder
         std::string output =
             "processed_" + std::string(std::filesystem::path(path).filename());
