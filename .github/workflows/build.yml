@@ -25,14 +25,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install vcpkg
-        run: choco install vcpkg -y
+        run: |
+          git clone https://github.com/microsoft/vcpkg C:\vcpkg
+          C:\vcpkg\bootstrap-vcpkg.bat
+          "VCPKG_INSTALLATION_ROOT=C:\vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       - name: Install dependencies
         run: |
-          $env:VCPKG_INSTALLATION_ROOT = "C:\\ProgramData\\chocolatey\\lib\\vcpkg\\tools\\vcpkg"
           $env:VCPKG_DEFAULT_TRIPLET = "x64-windows"
-          vcpkg install exiv2 opencv
+          & "${{ env.VCPKG_INSTALLATION_ROOT }}\vcpkg.exe" install exiv2 opencv
       - name: Configure
-        run: cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_INSTALLATION_ROOT\scripts\buildsystems\vcpkg.cmake
+        run: cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_INSTALLATION_ROOT }}\scripts\buildsystems\vcpkg.cmake
       - name: Build
         run: cmake --build build --config Release
       - name: Release
