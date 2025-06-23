@@ -27,6 +27,14 @@ Run the executable by passing a path to a folder of images:
 ./photo_editor ../path/to/catalog
 ```
 
+## Continuous Integration
+
+The repository includes a GitHub Actions workflow that automatically
+compiles the project on every push or pull request. The workflow installs
+OpenCV, runs CMake configuration, and builds the executable to verify that
+the code compiles successfully. You can find the configuration in
+`.github/workflows/build.yml`.
+
 ## Future Work
 
 - Implement mask adjustments and advanced AI tools.
