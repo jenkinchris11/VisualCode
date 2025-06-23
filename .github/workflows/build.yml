@@ -21,34 +21,6 @@ jobs:
         run: cmake --build build
 
   windows-release:
-    needs: build
-    runs-on: windows-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install OpenCV
-        run: |
-          choco install -y opencv
-          echo "OpenCV_DIR=C:/tools/opencv/build" >> $env:GITHUB_ENV
-      - uses: microsoft/setup-msbuild@v1
-      - name: Configure
-        run: cmake -B build -S . -A x64 -DCMAKE_BUILD_TYPE=Release
-      - name: Build
-        run: cmake --build build --config Release
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.sha }}
-          name: Release ${{ github.sha }}
-          files: build/Release/photo_editor.exe
-      - name: Release
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ github.sha }}
-          name: Release v${{ github.sha }}
-
-  windows-release:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
