@@ -24,13 +24,15 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Install vcpkg
+        run: choco install vcpkg -y
       - name: Install dependencies
         run: |
-          choco install cmake -y
-          choco install opencv -y
-          choco install exiv2 -y
+          $env:VCPKG_INSTALLATION_ROOT = "C:\\ProgramData\\chocolatey\\lib\\vcpkg\\tools\\vcpkg"
+          $env:VCPKG_DEFAULT_TRIPLET = "x64-windows"
+          vcpkg install exiv2 opencv
       - name: Configure
-        run: cmake -B build -S .
+        run: cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_INSTALLATION_ROOT\scripts\buildsystems\vcpkg.cmake
       - name: Build
         run: cmake --build build --config Release
       - name: Release
