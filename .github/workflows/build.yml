@@ -16,3 +16,9 @@ jobs:
         run: cmake -B build -S .
       - name: Build
         run: cmake --build build
+      - name: Release
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.sha }}
+          name: Release ${{ github.sha }}
