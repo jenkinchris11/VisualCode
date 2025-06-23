@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
 
         // save to output folder
         std::string output =
-            "processed_" + std::string(std::filesystem::path(path).filename());
+            "processed_" + std::filesystem::path(path).filename().string();
         proc.save(output);
         std::cout << "Processed " << path << " -> " << output << std::endl;
     }
