@@ -1,6 +1,6 @@
 # VisualCode Photo Editor Prototype
 
-This repository contains a minimal C++ photo editing prototype intended for use with Visual Studio Code. It demonstrates a basic catalog loader and simple brightness/contrast adjustments using OpenCV. The project is **not** a full replacement for professional tools like Photoshop or Lightroom, but it can serve as a foundation for further development.
+This repository contains a minimal C++ photo editing prototype intended for use with Visual Studio Code. It now includes a simple Qt GUI in addition to the command line functionality. The project is **not** a full replacement for professional tools like Photoshop or Lightroom, but it can serve as a foundation for further development.
 
 ## Features
 
@@ -13,11 +13,11 @@ Several advanced features requested (generative AI, professional denoise, social
 
 ## Building
 
-This project uses CMake and requires OpenCV and Exiv2 to be installed.
+This project uses CMake and requires OpenCV, Qt and Exiv2 to be installed.
 On Ubuntu, install the development packages with:
 
 ```bash
-sudo apt-get install libopencv-dev libexiv2-dev
+sudo apt-get install libopencv-dev libexiv2-dev qtbase5-dev
 ```
 
 ```bash
@@ -27,19 +27,18 @@ cmake ..
 make
 ```
 
-Run the executable by passing a path to a folder of images:
+Run the application:
 
 ```bash
-./photo_editor ../path/to/catalog
+./photo_editor
 ```
 
 ## Continuous Integration
 
 The repository includes a GitHub Actions workflow that automatically
-compiles the project on every push or pull request. The workflow installs
-OpenCV, runs CMake configuration, and builds the executable to verify that
-the code compiles successfully. You can find the configuration in
-`.github/workflows/build.yml`.
+builds the project on every push or pull request. Jobs run on Linux,
+Windows and macOS. The macOS job packages the release into a DMG file.
+You can find the configuration in `.github/workflows/build.yml`.
 
 ## Future Work
 
