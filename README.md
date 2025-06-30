@@ -41,6 +41,10 @@ OpenCV, runs CMake configuration, and builds the executable to verify that
 the code compiles successfully. You can find the configuration in
 `.github/workflows/build.yml`.
 
+On Windows, the workflow also packages a build artifact named
+`photo_editor.exe` and attaches it to a GitHub release so you can download
+and run the editor without building it yourself.
+
 ## Future Work
 
 - Implement mask adjustments and advanced AI tools.

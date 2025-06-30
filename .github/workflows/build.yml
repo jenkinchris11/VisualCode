@@ -38,8 +38,13 @@ jobs:
         run: cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_INSTALLATION_ROOT }}\scripts\buildsystems\vcpkg.cmake
       - name: Build
         run: cmake --build build --config Release
+      - name: Package executable
+        run: |
+          mkdir artifacts
+          cp build/Release/photo_editor.exe artifacts/photo_editor.exe
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ github.sha }}
           name: Windows Release v${{ github.sha }}
+          files: artifacts/photo_editor.exe
