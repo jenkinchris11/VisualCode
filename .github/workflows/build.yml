@@ -43,3 +43,27 @@ jobs:
         with:
           tag_name: v${{ github.sha }}
           name: Windows Release v${{ github.sha }}
+
+  macos-release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          brew update
+          brew install cmake opencv exiv2
+      - name: Configure
+        run: cmake -B build -S .
+      - name: Build
+        run: cmake --build build --config Release
+      - name: Package dmg
+        run: |
+          mkdir -p dist
+          cp build/photo_editor dist/
+          hdiutil create photo_editor.dmg -volname PhotoEditor -srcfolder dist -ov -format UDZO
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.sha }}
+          name: macOS Release v${{ github.sha }}
+          files: photo_editor.dmg
