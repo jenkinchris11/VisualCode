@@ -43,3 +43,25 @@ jobs:
         with:
           tag_name: v${{ github.sha }}
           name: Windows Release v${{ github.sha }}
+
+  macos-build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          brew install cmake qt opencv exiv2
+      - name: Configure
+        run: cmake -B build -S . -DQt5_DIR=$(brew --prefix qt)/lib/cmake/Qt5
+      - name: Build
+        run: cmake --build build --config Release
+      - name: Package DMG
+        run: |
+          mkdir -p dmgdir
+          cp build/photo_editor dmgdir/
+          hdiutil create photo_editor.dmg -fs HFS+ -srcfolder dmgdir
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-dmg
+          path: photo_editor.dmg
